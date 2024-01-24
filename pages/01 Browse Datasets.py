@@ -39,8 +39,7 @@ def get_metadata(repo_owner, repo_name, folder, file_name):
     headers = {'Authorization': f'Bearer {github_token}'}
     
     response = requests.get(url, headers=headers)
-    files = response.json()
-    return files
+    return response.json()
     if response.status_code == 200:
         files = [file for file in response.json() if file['name'].endswith('.json')]
         
@@ -59,7 +58,7 @@ def get_metadata(repo_owner, repo_name, folder, file_name):
         return f"Error: Unable to fetch files. Status code: {response.status_code}"
 tmp = get_metadata("Hezel2000", "mag4datasets", "metadata", "Emeishan.json")
 st.write(tmp)
-st.write('test 3')
+st.write('test2')
 
 @st.cache_data
 def get_csv_urls(repo_owner, repo_name, folder):
