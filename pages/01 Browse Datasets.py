@@ -34,7 +34,7 @@ st.title('Browse Datasets')
 # df_metadata = pd.DataFrame(metadata_files).T
 
 def get_metadata(repo_owner, repo_name, folder, file_name):
-    url = f'https://api.github.com/repos/{repo_owner}/{repo_name}/contents/{folder}'
+    url = f'https://api.github.com/repos/{repo_owner}/{repo_name}/contents/{folder}{file_name}'
     github_token = st.secrets['GitHub_Token']
     headers = {'Authorization': f'Bearer {github_token}'}
     
