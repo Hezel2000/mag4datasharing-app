@@ -56,10 +56,10 @@ df_metadata = pd.read_csv('https://raw.githubusercontent.com/Hezel2000/mag4datas
 
 file_urls = get_csv_urls("Hezel2000", "mag4datasets", "data")
 sel_dataset = st.selectbox('sel', df_metadata['Title'].sort_values(), label_visibility='collapsed')
-
-st.table(df_metadata)
+st.write('https://raw.githubusercontent.com/Hezel2000/mag4datasets/main/metadata/' + sel_dataset + '.json')
+st.table(pd.read_json('https://raw.githubusercontent.com/Hezel2000/mag4datasets/main/metadata/' + sel_dataset + '.json'))
+    metadata_files[sel_dataset+'.json'])
 st.dataframe(pd.read_csv(file_urls[sel_dataset]))
-
 
 # ------ Siedbar
 
