@@ -57,8 +57,8 @@ def get_orcid_user_info(orcid_token):
 # ------ Webpage
 st.title("ORCID Authentication")
 
-st.subheader('Works as follows (for the moment:)')
-st.info('Click on the button, click on the link – then authenticate. After the redirect to this page, click again on login – and you are all set. This will become more streamlined in the future. To logout – simply return to this page and you will be logged aout fro ORCID.')
+st.subheader('Works as follows (for the moment):')
+st.info('Click on the button, click on the link, then authenticate. After the redirect to this page, click again on login – and you are all set. This will become more streamlined in the future. To logout, simply return to this page and you will be logged aout fro ORCID.')
 
 # Check if the user is authenticated
 st.session_state.is_authenticated = False #st.session_state.get("is_authenticated", False)
@@ -83,10 +83,10 @@ if not st.session_state.is_authenticated:
                 st.session_state.orcid_token = orcid_token
                 st.success("Successfully logged in with ORCID")
 
-if st.session_state.is_authenticated:
-    # Display Orcid user info automatically
-    st.session_state.orcid_user_info = get_orcid_user_info(orcid_token)
-    st.write('orcid_user_info', st.session_state.orcid_user_info)
+# This can be de-commented to see what info and metadata are flowing in from ORCID
+# if st.session_state.is_authenticated:
+#     st.session_state.orcid_user_info = get_orcid_user_info(orcid_token)
+#     st.dataframe('orcid_user_info', st.session_state.orcid_user_info)
     
 
 # ------ Sidebar
