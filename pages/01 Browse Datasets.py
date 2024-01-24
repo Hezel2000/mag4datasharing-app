@@ -6,32 +6,6 @@ import pandas as pd
 
 st.title('Browse Datasets')
 
-# @st.cache_data
-# def get_json(repo_owner, repo_name, folder):
-#     url = f'https://api.github.com/repos/{repo_owner}/{repo_name}/contents/{folder}'
-#     github_token = st.secrets['GitHub_Token']
-#     headers = {'Authorization': f'Bearer {github_token}'}
-    
-#     response = requests.get(url, headers=headers)
-    
-#     if response.status_code == 200:
-#         files = [file for file in response.json() if file['name'].endswith('.json')]
-        
-#         # Fetch and store the contents of each JSON file
-#         json_data = {}
-#         for file in files:
-#             file_url = file['download_url']
-#             file_content_response = requests.get(file_url, headers=headers)
-#             file_content = file_content_response.json()  # Corrected line
-            
-#             # Store file content in the dictionary with the filename as the key
-#             json_data[file['name']] = file_content
-        
-#         return json_data
-#     else:
-#         return f"Error: Unable to fetch files. Status code: {response.status_code}"
-# metadata_files = get_json("Hezel2000", "mag4datasets", "metadata")
-# df_metadata = pd.DataFrame(metadata_files).T
 
 def get_metadata(repo_owner, repo_name, folder, file_name):
     url = f'https://api.github.com/repos/{repo_owner}/{repo_name}/contents/{folder}/{file_name}.json'
@@ -79,38 +53,31 @@ else:
 
 
 
-
-# Use the following, if the data are in a different repo
-
-# import requests
-
-# def get_github_folder_contents(username, repository, path, branch='main'):
-#     api_url = f'https://api.github.com/repos/{username}/{repository}/contents/{path}?ref={branch}'
+# Get Metadata from all files in the metadata folder – no longer required, kept for maybe later
+    
+# @st.cache_data
+# def get_json(repo_owner, repo_name, folder):
+#     url = f'https://api.github.com/repos/{repo_owner}/{repo_name}/contents/{folder}'
 #     github_token = st.secrets['GitHub_Token']
-#     headers = {"Authorization": f"Bearer {github_token}"}
-#     response = requests.get(api_url, headers=headers)
+#     headers = {'Authorization': f'Bearer {github_token}'}
+    
+#     response = requests.get(url, headers=headers)
     
 #     if response.status_code == 200:
-#         contents = response.json()
-#         return contents
+#         files = [file for file in response.json() if file['name'].endswith('.json')]
+        
+#         # Fetch and store the contents of each JSON file
+#         json_data = {}
+#         for file in files:
+#             file_url = file['download_url']
+#             file_content_response = requests.get(file_url, headers=headers)
+#             file_content = file_content_response.json()  # Corrected line
+            
+#             # Store file content in the dictionary with the filename as the key
+#             json_data[file['name']] = file_content
+        
+#         return json_data
 #     else:
-#         return st.write(f"Failed to retrieve contents. Status code: {response.status_code}")
-
-# # Replace these with your GitHub username, repository name, and folder path
-# username = 'Hezel2000'
-# repository = 'GeoCosmoChemDataAndTools'
-# folder_path = 'csv'
-
-# contents = get_github_folder_contents(username, repository, folder_path)
-
-# if contents:
-#     dataset_name_list = []
-#     dataset_download_urls = []
-#     for item in contents:
-#         if item['name'].endswith('.csv'):
-#             dataset_name_list.append(item['name'].split('.')[0])
-#             dataset_download_urls.append(item['download_url'])
-
-# sel_dataset = st.selectbox('Select Dataset', dataset_name_list)
-
-# st.dataframe(pd.read_csv(dataset_download_urls[dataset_name_list.index(sel_dataset)]))
+#         return f"Error: Unable to fetch files. Status code: {response.status_code}"
+# metadata_files = get_json("Hezel2000", "mag4datasets", "metadata")
+# df_metadata = pd.DataFrame(metadata_files).T
