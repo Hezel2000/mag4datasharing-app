@@ -34,12 +34,13 @@ st.title('Browse Datasets')
 # df_metadata = pd.DataFrame(metadata_files).T
 
 def get_metadata(repo_owner, repo_name, folder, file_name):
-    url = f'https://api.github.com/repos/{repo_owner}/{repo_name}/contents/{folder}{file_name}'
+    url = f'https://api.github.com/repos/{repo_owner}/{repo_name}/contents/{folder}'
     github_token = st.secrets['GitHub_Token']
     headers = {'Authorization': f'Bearer {github_token}'}
     
     response = requests.get(url, headers=headers)
-    return response.json()
+    tmp = response.json()
+    return tmp 
     if response.status_code == 200:
         files = [file for file in response.json() if file['name'].endswith('.json')]
         
@@ -56,9 +57,8 @@ def get_metadata(repo_owner, repo_name, folder, file_name):
         return json_data
     else:
         return f"Error: Unable to fetch files. Status code: {response.status_code}"
-tmp = get_metadata("Hezel2000", "mag4datasets", "metadata", "Emeishan.json")
+tmp = get_metadata("Hezel2000", "mag4datasets", "metadata", "Banda Arc")
 st.write(tmp)
-st.write('test2')
 
 @st.cache_data
 def get_csv_urls(repo_owner, repo_name, folder):
