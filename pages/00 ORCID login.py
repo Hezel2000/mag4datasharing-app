@@ -5,11 +5,13 @@ import requests
 # Orcid Auth
 CLIENT_ID = st.secrets["Orcid_ID"]
 CLIENT_SECRET = st.secrets["Orcid_Secret"]
+# ORCID_API_URL = "https://pub.orcid.org/v3.0/"
 # REDIRECT_URI = "https://orcid-app-u9tbyykcsuwozua46jf3hk.streamlit.app/"
 # REDIRECT_URI = "https://geo-cosmo-data-sharing-platform-bvniuih82j6l2aeq3jxfyb.streamlit.app/"
 # REDIRECT_URI = "https://mag4-data-sharing.streamlit.app/ORCID_login"
-REDIRECT_URI = "https://geo-cosmo-data-sharing-platform-bvniuih82j6l2aeq3jxfyb.streamlit.app/ORCID_login"
-# ORCID_API_URL = "https://pub.orcid.org/v3.0/"
+# REDIRECT_URI = "https://geo-cosmo-data-sharing-platform-bvniuih82j6l2aeq3jxfyb.streamlit.app/ORCID_login"
+# 'https://geo-cosmo-data-sharing-platform-bvniuih82j6l2aeq3jxfyb.streamlit.app/ORCID_login'
+REDIRECT_URI = "https://mag4datasharing-app.streamlit.app/ORCID_login"
 
 
 # Function to get Orcid token
