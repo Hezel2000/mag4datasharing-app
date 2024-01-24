@@ -67,7 +67,7 @@ file_urls = get_csv_urls("Hezel2000", "mag4datasets", "data")
 sel_dataset = st.selectbox('sel', df_metadata['Title'].sort_values(), label_visibility='collapsed')
 
 dataset_metadata = get_metadata("Hezel2000", "mag4datasets", "metadata", sel_dataset)
-st.write(dataset_metadata)
+st.table(dataset_metadata)
 st.dataframe(pd.read_csv(file_urls[sel_dataset]))
 
 # ------ Siedbar
