@@ -6,12 +6,6 @@ import pandas as pd
 
 st.title('Browse Datasets')
 
-
-df = pd.read_csv('https://raw.githubusercontent.com/Hezel2000/mag4datasets/main/overview_available_datasets.csv')
-st.write(df)
-
-
-
 # @st.cache_data
 # def get_json(repo_owner, repo_name, folder):
 #     url = f'https://api.github.com/repos/{repo_owner}/{repo_name}/contents/{folder}'
@@ -36,6 +30,8 @@ st.write(df)
 #         return json_data
 #     else:
 #         return f"Error: Unable to fetch files. Status code: {response.status_code}"
+# metadata_files = get_json("Hezel2000", "mag4datasets", "metadata")
+# df_metadata = pd.DataFrame(metadata_files).T
     
 @st.cache_data
 def get_csv_urls(repo_owner, repo_name, folder):
@@ -56,15 +52,13 @@ def get_csv_urls(repo_owner, repo_name, folder):
     else:
         return f"Error: Unable to fetch files. Status code: {response.status_code}"
 
+df_metadata = pd.read_csv('https://raw.githubusercontent.com/Hezel2000/mag4datasets/main/overview_available_datasets.csv')
 
-# metadata_files = get_json("Hezel2000", "mag4datasets", "metadata")
 file_urls = get_csv_urls("Hezel2000", "mag4datasets", "data")
-df_metadata = pd.DataFrame(metadata_files).T
-
 sel_dataset = st.selectbox('sel', df_metadata['Title'].sort_values(), label_visibility='collapsed')
 
+v
 st.dataframe(pd.read_csv(file_urls[sel_dataset]))
-st.table(metadata_files[sel_dataset+'.json'])
 
 
 # ------ Siedbar
