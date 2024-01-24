@@ -40,7 +40,7 @@ def get_metadata(repo_owner, repo_name, folder, file_name):
     
     response = requests.get(url, headers=headers)
     files = response.json()
-    return files, files[file_name]
+    return files
     if response.status_code == 200:
         files = [file for file in response.json() if file['name'].endswith('.json')]
         
