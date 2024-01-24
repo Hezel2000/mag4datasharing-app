@@ -32,11 +32,37 @@ st.title('Browse Datasets')
 #         return f"Error: Unable to fetch files. Status code: {response.status_code}"
 # metadata_files = get_json("Hezel2000", "mag4datasets", "metadata")
 # df_metadata = pd.DataFrame(metadata_files).T
+
+def get_metadata(repo_owner, repo_name, folder, file_name):
+    url = f'https://api.github.com/repos/{repo_owner}/{repo_name}/contents/{folder}'
+    github_token = st.secrets['GitHub_Token']
+    headers = {'Authorization': f'Bearer {github_token}'}
     
+    response = requests.get(url, headers=headers)
+    return response
+    if response.status_code == 200:
+        files = [file for file in response.json() if file['name'].endswith('.json')]
+        
+        # Fetch and store the contents of each JSON file
+        json_data = {}
+        for file in files:
+            file_url = file['download_url']
+            file_content_response = requests.get(file_url, headers=headers)
+            file_content = file_content_response.json()  # Corrected line
+            
+            # Store file content in the dictionary with the filename as the key
+            json_data[file['name']] = file_content
+        
+        return json_data
+    else:
+        return f"Error: Unable to fetch files. Status code: {response.status_code}"
+tmp = get_metadata("Hezel2000", "mag4datasets", "metadata", "Banda Arc")
+
+
 @st.cache_data
 def get_csv_urls(repo_owner, repo_name, folder):
     url = f'https://api.github.com/repos/{repo_owner}/{repo_name}/contents/{folder}'
-    github_token = st.secrets['GitHub_Token']
+    #github_token = st.secrets['GitHub_Token']
     headers = {'Authorization': f'Bearer {github_token}'}
     
     response = requests.get(url, headers=headers)
@@ -58,7 +84,7 @@ file_urls = get_csv_urls("Hezel2000", "mag4datasets", "data")
 sel_dataset = st.selectbox('sel', df_metadata['Title'].sort_values(), label_visibility='collapsed')
 st.write('https://raw.githubusercontent.com/Hezel2000/mag4datasets/main/metadata/' + sel_dataset + '.json')
 st.table(pd.read_json('https://raw.githubusercontent.com/Hezel2000/mag4datasets/main/metadata/' + sel_dataset + '.json'))
-    metadata_files[sel_dataset+'.json'])
+
 st.dataframe(pd.read_csv(file_urls[sel_dataset]))
 
 # ------ Siedbar
