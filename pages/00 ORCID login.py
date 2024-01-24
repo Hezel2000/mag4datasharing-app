@@ -81,12 +81,10 @@ if not st.session_state.is_authenticated:
                 st.session_state.is_authenticated = True
                 st.session_state.orcid_token = orcid_token
                 st.session_state.orcid_user_info = get_orcid_user_info(orcid_token)
+            # This can be de-commented to see what info and metadata are flowing in from ORCID
+                # st.dataframe('orcid_user_info', st.session_state.orcid_user_info)
                 st.success("Successfully logged in with ORCID")
 
-# This can be de-commented to see what info and metadata are flowing in from ORCID
-# if st.session_state.is_authenticated:
-#     st.session_state.orcid_user_info = get_orcid_user_info(orcid_token)
-#     st.dataframe('orcid_user_info', st.session_state.orcid_user_info)
     
 
 # ------ Sidebar
