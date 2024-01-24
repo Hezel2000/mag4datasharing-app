@@ -57,7 +57,7 @@ def get_metadata(repo_owner, repo_name, folder, file_name):
     else:
         return f"Error: Unable to fetch files. Status code: {response.status_code}"
 tmp = get_metadata("Hezel2000", "mag4datasets", "metadata", "Banda Arc")
-
+st.write(tmp)
 
 @st.cache_data
 def get_csv_urls(repo_owner, repo_name, folder):
@@ -82,8 +82,6 @@ df_metadata = pd.read_csv('https://raw.githubusercontent.com/Hezel2000/mag4datas
 
 file_urls = get_csv_urls("Hezel2000", "mag4datasets", "data")
 sel_dataset = st.selectbox('sel', df_metadata['Title'].sort_values(), label_visibility='collapsed')
-st.write('https://raw.githubusercontent.com/Hezel2000/mag4datasets/main/metadata/' + sel_dataset + '.json')
-st.table(pd.read_json('https://raw.githubusercontent.com/Hezel2000/mag4datasets/main/metadata/' + sel_dataset + '.json'))
 
 st.dataframe(pd.read_csv(file_urls[sel_dataset]))
 
