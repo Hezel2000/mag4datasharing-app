@@ -53,6 +53,7 @@ def get_orcid_user_info(orcid_token):
     else:
         return st.error('info response error')
 
+
 # ------ Webpage
 st.title("ORCID Authentication")
 
@@ -82,15 +83,11 @@ if not st.session_state.is_authenticated:
                 st.session_state.orcid_token = orcid_token
                 st.success("Successfully logged in with ORCID")
 
+if st.session_state.is_authenticated:
     # Display Orcid user info automatically
     st.session_state.orcid_user_info = get_orcid_user_info(orcid_token)
     st.write('orcid_user_info', st.session_state.orcid_user_info)
     
-    # Your existing Streamlit content goes here
-    st.title('Your uploaded files')
-    st.write('A simply filtered table with your uploaded datasets, with a number of editing options: update, delete (restricted!)')
-    
-
 
 # ------ Sidebar
 if st.session_state.is_authenticated:
