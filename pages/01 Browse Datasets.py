@@ -1,12 +1,9 @@
 import streamlit as st
 import requests
-#import os
-#import json
 import pandas as pd
+#import json
 
-st.title('Browse Datasets')
-
-
+# ------ Functions
 def get_metadata(repo_owner, repo_name, folder, file_name):
     url = f'https://api.github.com/repos/{repo_owner}/{repo_name}/contents/{folder}/{file_name}.json'
     github_token = st.secrets['GitHub_Token']
@@ -35,6 +32,11 @@ def get_csv_urls(repo_owner, repo_name, folder):
     else:
         return f"Error: Unable to fetch files. Status code: {response.status_code}"
 
+
+# ------ Webpage
+st.title('Browse Dataset Info & Content')
+
+
 df_metadata = pd.read_csv('https://raw.githubusercontent.com/Hezel2000/mag4datasets/main/overview_available_datasets.csv')
 
 file_urls = get_csv_urls("Hezel2000", "mag4datasets", "data")
@@ -44,8 +46,8 @@ dataset_metadata = get_metadata("Hezel2000", "mag4datasets", "metadata", sel_dat
 st.table(dataset_metadata)
 st.dataframe(pd.read_csv(file_urls[sel_dataset]))
 
-# ------ Siedbar
 
+# ------ Siedbar
 if st.session_state.is_authenticated:
     st.sidebar.success("You are logged in with ORCID")
 else:
@@ -53,6 +55,7 @@ else:
 
 
 
+# ------ Retired
 # Get Metadata from all files in the metadata folder – no longer required, kept for maybe later
     
 # @st.cache_data
