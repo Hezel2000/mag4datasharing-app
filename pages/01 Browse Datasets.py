@@ -56,7 +56,7 @@ def get_metadata(repo_owner, repo_name, folder, file_name):
         return json_data
     else:
         return f"Error: Unable to fetch files. Status code: {response.status_code}"
-tmp = get_metadata("Hezel2000", "mag4datasets", "metadata", "Banda Arc.json")
+tmp = get_metadata("Hezel2000", "mag4datasets", "metadata", "Emeishan.json")
 st.write(tmp)
 st.write('test2')
 
