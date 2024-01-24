@@ -1,1 +1,0 @@
-# mag4datasharing-app
