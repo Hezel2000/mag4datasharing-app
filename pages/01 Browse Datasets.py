@@ -62,7 +62,7 @@ tmp = get_metadata("Hezel2000", "mag4datasets", "metadata", "Banda Arc")
 @st.cache_data
 def get_csv_urls(repo_owner, repo_name, folder):
     url = f'https://api.github.com/repos/{repo_owner}/{repo_name}/contents/{folder}'
-    #github_token = st.secrets['GitHub_Token']
+    github_token = st.secrets['GitHub_Token']
     headers = {'Authorization': f'Bearer {github_token}'}
     
     response = requests.get(url, headers=headers)
