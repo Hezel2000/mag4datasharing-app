@@ -1,0 +1,1 @@
+Just a file so there is always one in this folder, as this folder is required for temporary stoarge of newly uploaoded files and it might be that this folder gets deleted if empty, which could cause problems.

@@ -1,35 +1,41 @@
 import streamlit as st
 import requests
-import os
-import json
+#import os
+#import json
 import pandas as pd
 
 st.title('Browse Datasets')
 
-@st.cache_data
-def get_json(repo_owner, repo_name, folder):
-    url = f'https://api.github.com/repos/{repo_owner}/{repo_name}/contents/{folder}'
-    github_token = st.secrets['GitHub_Token']
-    headers = {'Authorization': f'Bearer {github_token}'}
+
+df = pd.read_csv('https://raw.githubusercontent.com/Hezel2000/mag4datasets/main/overview_available_datasets.csv')
+st.write(df)
+
+
+
+# @st.cache_data
+# def get_json(repo_owner, repo_name, folder):
+#     url = f'https://api.github.com/repos/{repo_owner}/{repo_name}/contents/{folder}'
+#     github_token = st.secrets['GitHub_Token']
+#     headers = {'Authorization': f'Bearer {github_token}'}
     
-    response = requests.get(url, headers=headers)
+#     response = requests.get(url, headers=headers)
     
-    if response.status_code == 200:
-        files = [file for file in response.json() if file['name'].endswith('.json')]
+#     if response.status_code == 200:
+#         files = [file for file in response.json() if file['name'].endswith('.json')]
         
-        # Fetch and store the contents of each JSON file
-        json_data = {}
-        for file in files:
-            file_url = file['download_url']
-            file_content_response = requests.get(file_url, headers=headers)
-            file_content = file_content_response.json()  # Corrected line
+#         # Fetch and store the contents of each JSON file
+#         json_data = {}
+#         for file in files:
+#             file_url = file['download_url']
+#             file_content_response = requests.get(file_url, headers=headers)
+#             file_content = file_content_response.json()  # Corrected line
             
-            # Store file content in the dictionary with the filename as the key
-            json_data[file['name']] = file_content
+#             # Store file content in the dictionary with the filename as the key
+#             json_data[file['name']] = file_content
         
-        return json_data
-    else:
-        return f"Error: Unable to fetch files. Status code: {response.status_code}"
+#         return json_data
+#     else:
+#         return f"Error: Unable to fetch files. Status code: {response.status_code}"
     
 @st.cache_data
 def get_csv_urls(repo_owner, repo_name, folder):
@@ -51,7 +57,7 @@ def get_csv_urls(repo_owner, repo_name, folder):
         return f"Error: Unable to fetch files. Status code: {response.status_code}"
 
 
-metadata_files = get_json("Hezel2000", "mag4datasets", "metadata")
+# metadata_files = get_json("Hezel2000", "mag4datasets", "metadata")
 file_urls = get_csv_urls("Hezel2000", "mag4datasets", "data")
 df_metadata = pd.DataFrame(metadata_files).T
 
