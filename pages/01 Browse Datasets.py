@@ -37,8 +37,9 @@ def get_metadata(repo_owner, repo_name, folder, file_name):
     url = f'https://api.github.com/repos/{repo_owner}/{repo_name}/contents/{folder}/{file_name}.json'
     github_token = st.secrets['GitHub_Token']
     headers = {'Authorization': f'Bearer {github_token}'}
-    response = requests.get(url, headers=headers)
-    return response.json()
+    #response = requests.get(url, headers=headers)
+    file_content_response = requests.get(file['download_url'], headers=headers)
+    return file_content_response.json()
 
 @st.cache_data
 def get_csv_urls(repo_owner, repo_name, folder):
