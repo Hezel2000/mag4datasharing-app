@@ -38,7 +38,7 @@ def get_metadata(repo_owner, repo_name, folder, file_name):
     github_token = st.secrets['GitHub_Token']
     headers = {'Authorization': f'Bearer {github_token}'}
     response = requests.get(url, headers=headers)
-    file_content_response = requests.get(file_name['download_url'], headers=headers)
+    #file_content_response = requests.get(file_name['download_url'], headers=headers)
     return response.json()
 
 @st.cache_data
