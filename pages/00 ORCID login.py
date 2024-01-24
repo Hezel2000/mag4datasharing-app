@@ -80,6 +80,7 @@ if not st.session_state.is_authenticated:
             if orcid_token:
                 st.session_state.is_authenticated = True
                 st.session_state.orcid_token = orcid_token
+                st.session_state.orcid_user_info = get_orcid_user_info(orcid_token)
                 st.success("Successfully logged in with ORCID")
 
 # This can be de-commented to see what info and metadata are flowing in from ORCID
