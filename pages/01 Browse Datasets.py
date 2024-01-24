@@ -39,7 +39,7 @@ def get_metadata(repo_owner, repo_name, folder, file_name):
     headers = {'Authorization': f'Bearer {github_token}'}
     
     response = requests.get(url, headers=headers)
-    return response
+    return response.json()
     if response.status_code == 200:
         files = [file for file in response.json() if file['name'].endswith('.json')]
         
