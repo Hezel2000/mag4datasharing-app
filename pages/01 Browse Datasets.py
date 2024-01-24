@@ -57,7 +57,6 @@ df_metadata = pd.read_csv('https://raw.githubusercontent.com/Hezel2000/mag4datas
 file_urls = get_csv_urls("Hezel2000", "mag4datasets", "data")
 sel_dataset = st.selectbox('sel', df_metadata['Title'].sort_values(), label_visibility='collapsed')
 
-v
 st.dataframe(pd.read_csv(file_urls[sel_dataset]))
 
 
