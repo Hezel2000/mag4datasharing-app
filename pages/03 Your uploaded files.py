@@ -2,7 +2,8 @@ import streamlit as st
 
 st.title('Your uploaded files')
 if st.session_state.is_authenticated == True:
-    st.write('A simply filtered table with your uploaded datasets, with a number of editing options: update, delete (restricted!)')
+    df_metadata = pd.read_csv('https://raw.githubusercontent.com/Hezel2000/mag4datasets/main/overview_available_datasets.csv')
+    st.dataframe(df_metadata[df_metadata['ORCID'] == st.session_state.orcid_user_info['id']])
 else:
     st.subheader('Authenticate with ORCID to see your uploaded datsets.')
 
