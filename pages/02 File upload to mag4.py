@@ -149,13 +149,13 @@ if uploaded_file is not None:
 
 
 # ---------- Commit and push changes to GitHub
-    if meta_title in df_metadata['Title'].values or meta_short_title in df_metadata['Short Title'].values:
-        st.write('The Title or Short Title already exist. Please choose (a) new one(s). Otherwise the file cannot be uplaoded.')
-        if meta_short_title == None or meta_keywords == None or meta_description == None or meta_type == None or meta_usage_licence == None:
-            st.session_state.all_metadata_added = True
-            st.write('All mandatory metadata need to be added (with sensible information).')
-        else:
-            st.session_state.all_metadata_added = False
+    # if meta_title in df_metadata['Title'].values or meta_short_title in df_metadata['Short Title'].values:
+    #     st.write('The Title or Short Title already exist. Please choose (a) new one(s). Otherwise the file cannot be uplaoded.')
+    if meta_short_title == None or meta_keywords == None or meta_description == None or meta_type == None or meta_usage_licence == None:
+        st.session_state.all_metadata_added = True
+        st.write('All mandatory metadata need to be added (with sensible information).')
+    else:
+        st.session_state.all_metadata_added = False
 
     if st.button("Upload to mag4", disabled=st.session_state.all_metadata_added):
         response = upload_to_github(file_path_user_dataset, str(st.session_state.orcid_user_info['sub']), 'csv')
