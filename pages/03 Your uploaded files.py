@@ -9,7 +9,7 @@ if st.session_state.is_authenticated == True:
 
     df_metadata_personal.insert(0, 'update', False)
     df_metadata_personal.insert(0, 'delete', False)
-    st.data_editor(df_metadata_personal, disabled = ['Short Title', 'Licence'], hide_index=True)
+    st.data_editor(df_metadata_personal, disabled = df_metadata_personal.columns.tolist(), hide_index=True)
 
 else:
     st.subheader('Authenticate with ORCID to see your uploaded datsets.')
