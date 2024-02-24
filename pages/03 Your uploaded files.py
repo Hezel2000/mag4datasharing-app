@@ -14,7 +14,7 @@ if st.session_state.is_authenticated == True:
     df_with_checkboxes = pd.concat([pd.Series([checkbox_col1] * len(df_metadata_personal), name="update"),
                                     pd.Series([checkbox_col2] * len(df_metadata_personal), name="delete"),
                                     df_metadata_personal], axis=1)
-    st.data_editor(df_with_checkboxes, disabled = ['name'], hide_index=True)
+    st.data_editor(df_with_checkboxes, disabled = ['Short Title', 'Licence'], hide_index=True)
 
 else:
     st.subheader('Authenticate with ORCID to see your uploaded datsets.')
