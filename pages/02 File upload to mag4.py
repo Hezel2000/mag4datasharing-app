@@ -102,7 +102,7 @@ if uploaded_file is not None:
         st.write('Short Title already exists, please rename your file to another name. You can search for existing file names in the dataset browser.')
     meta_short_title = st.text_input('Short Title', value=None, placeholder='electransener')
     if meta_short_title in df_metadata['Short Title'].values:
-        st.write('Short Title already exists, please choose another one.')
+        st.write('Short Title already exists, please choose another one. You can search for existing file names in the dataset browser.')
     meta_keywords = st.text_input('Keywords (comma separted if more than one – which would be helpful)', value=None, placeholder='eV, absorption, edge, binding, x-ray', help='These are used in the search function. No need to repeat words that are already in the title or description.')
     meta_description = st.text_input('Description', value=None, placeholder='IMA–CNMNC approved mineral symbols')
     meta_type = st.selectbox('Type of dataset', ('Basic', 'Database Dataset', 'Standard','Example', 'Other'), help='basic: e.g., element masses, element-oxide conversion factors, decay constants; standard: composition of (a) reference material(s); example: to be used for testing or education;  other: anything else – please indicate in the comments why you chose other')
@@ -149,11 +149,13 @@ if uploaded_file is not None:
 
 
 # ---------- Commit and push changes to GitHub
-    if meta_short_title == None or meta_keywords == None or meta_description == None or meta_type == None or meta_usage_licence == None:
-        st.session_state.all_metadata_added = True
-        st.write('All mandatory metadata need to be added (with sensible information).')
-    else:
-        st.session_state.all_metadata_added = False
+    if meta_title in df_metadata['Title'].values or meta_short_title in df_metadata['Short Title'].values:
+        st.write('The Title or Short Title already exist. Please choose (a) new one(s). Otherwise the file cannot be uplaoded.')
+        if meta_short_title == None or meta_keywords == None or meta_description == None or meta_type == None or meta_usage_licence == None:
+            st.session_state.all_metadata_added = True
+            st.write('All mandatory metadata need to be added (with sensible information).')
+        else:
+            st.session_state.all_metadata_added = False
 
     if st.button("Upload to mag4", disabled=st.session_state.all_metadata_added):
         response = upload_to_github(file_path_user_dataset, str(st.session_state.orcid_user_info['sub']), 'csv')
