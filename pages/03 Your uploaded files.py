@@ -11,7 +11,7 @@ if st.session_state.is_authenticated == True:
     checkbox_col2 = st.checkbox("Checkbox 2", key='checkbox2')
 
     # Concatenate the checkboxes with the DataFrame
-    df_with_checkboxes = pd.concat([pd.Series([checkbox_col1] * len(df_metadata_personal), name="update"),
+    df_with_checkboxes = pd.concat([pd.Series(True * len(df_metadata_personal), name="update"),
                                     pd.Series([checkbox_col2] * len(df_metadata_personal), name="delete"),
                                     df_metadata_personal], axis=1)
     st.data_editor(df_with_checkboxes, disabled = ['Short Title', 'Licence'], hide_index=True)
