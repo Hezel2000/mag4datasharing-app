@@ -136,7 +136,7 @@ if uploaded_file is not None:
         "Version": meta_version if meta_version is not None else None,
         "Source": meta_source if meta_source is not None else None,
         "References": meta_references if meta_references is not None else None,
-        "Comments": meta_comments if meta_comments is not None else None
+        "Comments": meta_comments if meta_comments is not None else None,
         "Request doi": 'no' if meta_request_doi is not None else 'yes'
     }
     
