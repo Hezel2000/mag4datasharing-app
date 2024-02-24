@@ -7,12 +7,12 @@ if st.session_state.is_authenticated == True:
     df_metadata = pd.read_csv('https://raw.githubusercontent.com/Hezel2000/mag4datasets/main/overview_available_datasets.csv')
     df_metadata_personal = st.dataframe(df_metadata[df_metadata['ORCID'] == st.session_state.orcid_user_info['id'].split('/')[-1]])
 
-    # checkbox_col1 = st.checkbox("Checkbox 1", key='checkbox1')
-    # checkbox_col2 = st.checkbox("Checkbox 2", key='checkbox2')
+    checkbox_col1 = st.checkbox("Checkbox 1", key='checkbox1')
+    checkbox_col2 = st.checkbox("Checkbox 2", key='checkbox2')
 
     # Concatenate the checkboxes with the DataFrame
-    df_with_checkboxes = pd.concat([pd.Series([st.checkbox("Checkbox 1", key='checkbox1')] * len(df_metadata_personal), name="update"),
-                                    pd.Series([st.checkbox("Checkbox 2", key='checkbox2')] * len(df_metadata_personal), name="delete"),
+    df_with_checkboxes = pd.concat([pd.Series([checkbox_col1] * len(df_metadata_personal), name="update"),
+                                    pd.Series([checkbox_col2] * len(df_metadata_personal), name="delete"),
                                     df_metadata_personal], axis=1)
     st.dataframe(df_with_checkboxes, index=False)
 
