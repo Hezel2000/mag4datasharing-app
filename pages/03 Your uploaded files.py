@@ -11,8 +11,8 @@ if st.session_state.is_authenticated == True:
     checkbox_col2 = st.checkbox("Checkbox 2", key='checkbox2')
 
     # Concatenate the checkboxes with the DataFrame
-    df_with_checkboxes = pd.concat([pd.Series([checkbox_col1] * len(df), name="Checkbox 1"),
-                                    pd.Series([checkbox_col2] * len(df), name="Checkbox 2"),
+    df_with_checkboxes = pd.concat([pd.Series([checkbox_col1] * len(df_metadata), name="Checkbox 1"),
+                                    pd.Series([checkbox_col2] * len(df_metadata), name="Checkbox 2"),
                                     df_metadata], axis=1)
     st.dataframe(df_with_checkboxes)
 
