@@ -97,8 +97,8 @@ if uploaded_file is not None:
     st.text_input('ORCID', st.session_state.orcid_user_info['id'], disabled=True)
     st.text_input('Name', st.session_state.orcid_user_info['given_name'] +' '+ st.session_state.orcid_user_info['family_name'], disabled=True)
     # meta_email = st.text_input('Email address', value=None, placeholder='Email addressyour email address')
-    st.text_input('Title', uploaded_file.name.split('.')[0], disabled=True)
-    if df_metadata[df_metadata['Title'] == meta_short_title]:
+    meta_title = st.text_input('Title', uploaded_file.name.split('.')[0], disabled=True)
+    if df_metadata[df_metadata['Title'] == meta_title]:
         st.write('Short Title already exists, please rename your file to another name. You can search for existing file names in the dataset browser.')
     meta_short_title = st.text_input('Short Title', value=None, placeholder='electransener')
     if df_metadata[df_metadata['Short Title'] == meta_short_title]:
