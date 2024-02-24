@@ -115,6 +115,7 @@ if uploaded_file is not None:
     meta_source = st.text_input('Source', value=None, placeholder='Karlsruhe Institute of Technology Chart of Nuclides', help='Add the source as name, weblink, ... so the origin of the dataset can be traced back, if it is not yours.')
     meta_references = st.text_input('Reference(s) (comma separated if more than one)', value=None, placeholder='10.1016/j.chemer.2017.05.003, 10.2138/gselements.16.1.73', help='as dois only. A doi is a **d**igital **o**bject **i**dentifier that is almost always provided with a publication or other digital object such as a database.')
     meta_comments = st.text_input('Comment(s)', value=None, placeholder='everything not coverd above')
+    meta_request_doi = st.checkbox('Request a doi', value=False, disabled=True)
 
 
 # ---------- Metadata Preview
@@ -136,6 +137,7 @@ if uploaded_file is not None:
         "Source": meta_source if meta_source is not None else None,
         "References": meta_references if meta_references is not None else None,
         "Comments": meta_comments if meta_comments is not None else None
+        "Request doi": 'no' if meta_request_doi is not None else 'yes'
     }
     
     #Writing the json file

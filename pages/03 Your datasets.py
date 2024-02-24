@@ -24,7 +24,7 @@ if st.session_state.is_authenticated == True:
         st.dataframe(df_ticked[df_ticked['update'] == True])
         st.file_uploader('Choose file(s)')
         if st.button('update'):
-            st.write('deleted')
+            st.write('updated')
 
 else:
     st.subheader('Authenticate with ORCID to see your uploaded datsets.')
