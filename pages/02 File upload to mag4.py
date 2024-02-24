@@ -70,6 +70,9 @@ def upload_to_github(file_path, commit_message, file_type):
 st.title("File Upload to the mag4 Database")
 st.header('Choose file to upload')
 
+# Load the file with all available datasets to check whether a user accidentaly uses an already existing file title or abbreviated title
+df_metadata = pd.read_csv('https://raw.githubusercontent.com/Hezel2000/mag4datasets/main/overview_available_datasets.csv')
+
 # Depends on whether a user is logged in to Orcid -> False when logged in
 if st.session_state.is_authenticated:
     file_uploader_enable_parameter=False
@@ -95,7 +98,11 @@ if uploaded_file is not None:
     st.text_input('Name', st.session_state.orcid_user_info['given_name'] +' '+ st.session_state.orcid_user_info['family_name'], disabled=True)
     # meta_email = st.text_input('Email address', value=None, placeholder='Email addressyour email address')
     st.text_input('Title', uploaded_file.name.split('.')[0], disabled=True)
+    if df_metadata[df_metadata['Title'] == meta_short_title]:
+        st.write('Short Title already exists, please rename your file to another name. You can search for existing file names in the dataset browser.')
     meta_short_title = st.text_input('Short Title', value=None, placeholder='electransener')
+    if df_metadata[df_metadata['Short Title'] == meta_short_title]:
+        st.write('Short Title already exists, please choose another one.')
     meta_keywords = st.text_input('Keywords (comma separted if more than one – which would be helpful)', value=None, placeholder='eV, absorption, edge, binding, x-ray', help='These are used in the search function. No need to repeat words that are already in the title or description.')
     meta_description = st.text_input('Description', value=None, placeholder='IMA–CNMNC approved mineral symbols')
     meta_type = st.selectbox('Type of dataset', ('Basic', 'Database Dataset', 'Standard','Example', 'Other'), help='basic: e.g., element masses, element-oxide conversion factors, decay constants; standard: composition of (a) reference material(s); example: to be used for testing or education;  other: anything else – please indicate in the comments why you chose other')
