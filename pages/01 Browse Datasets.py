@@ -37,7 +37,7 @@ def get_csv_urls(repo_owner, repo_name, folder):
 st.title('Browse Dataset Info & Content')
 df_metadata = pd.read_csv('https://raw.githubusercontent.com/Hezel2000/mag4datasets/main/overview_available_datasets.csv')
 
-tab1, tab2, tab3 = st.tabs(['All Datasets', 'Select a Dataset', 'Search'])
+tab1, tab2 = st.tabs(['All Datasets', 'Select a Dataset'])
 
 with tab1:
     st.dataframe(df_metadata)
@@ -52,9 +52,7 @@ with tab2:
         dataset_metadata = get_metadata("Hezel2000", "mag4datasets", "metadata", sel_dataset)
         st.table(dataset_metadata)
         st.dataframe(pd.read_csv(file_urls[sel_dataset]))
-
-with tab3:
-    st.write('to be added')
+        
 
 
 # ------ Siedbar
