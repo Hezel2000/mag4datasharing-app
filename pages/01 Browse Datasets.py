@@ -44,7 +44,7 @@ with tab1:
 
 with tab2:
     file_urls = get_csv_urls("Hezel2000", "mag4datasets", "data")
-    sel_dataset = st.selectbox('sel', df_metadata['Title'].sort_values(), label_visibility='collapsed')
+    sel_dataset = st.selectbox('sel', df_metadata['Title'].sort_values(), label_visibility='collapsed', value=None, placeholder='click to select a dataset')
 
     dataset_metadata = get_metadata("Hezel2000", "mag4datasets", "metadata", sel_dataset)
     st.table(dataset_metadata)
