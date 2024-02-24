@@ -16,6 +16,8 @@ if st.session_state.is_authenticated == True:
     if len(df_ticked[df_ticked['delete']==True]) > 0:
         st.write('to be deleted:')
         st.dataframe(df_ticked[df_ticked['delete'] == True])
+        if st.button('Delete'):
+            st.write('deleted')
 
 else:
     st.subheader('Authenticate with ORCID to see your uploaded datsets.')
