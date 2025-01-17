@@ -70,7 +70,7 @@ if not st.session_state.is_authenticated:
         st.write(f"Click [here]({authorization_url}) to log in with Orcid.")
 
         # Check if the authorization code is present in the URL
-        url = st.experimental_get_query_params() # should soon be: st.query_params()
+        url = st.st.query_params() # should soon be: st.query_params()
         authorization_response = url.get("code", None)
 
         if authorization_response:
