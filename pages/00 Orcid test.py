@@ -36,9 +36,9 @@ if st.sidebar.button("Log out"):
 
 
 if st.user.is_logged_in:
-    st.write("User type:", type(st.experimental_user))
-    st.write("User dir:", dir(st.experimental_user))
-    st.write("User dict:", st.experimental_user.to_dict())
+    st.write("User type:", type(st.user))
+    st.write("User dir:", dir(st.user))
+    st.write("User dict:", st.user.to_dict())
 
 
 # if st.button('Google'):
