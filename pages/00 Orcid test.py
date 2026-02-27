@@ -16,7 +16,7 @@ else:
 
 st.write(f"Hello, {st.user.name}!")
 
-st.write("Query params:", st.experimental_get_query_params())
+st.write("Query params:", st.query_params())
 st.write("User:", getattr(st.user, "is_logged_in", None))
 st.write("Secrets auth section:", st.secrets.get("auth"))
 
