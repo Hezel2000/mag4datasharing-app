@@ -39,10 +39,26 @@ else:
         st.logout()
 
 # st.write(f"Hello, {st.user.name}!")
+
+user_info = st.user.to_dict()
+
+display_name = (
+    user_info.get("name") or 
+    (f"{user_info.get('given_name', '')} {user_info.get('family_name', '')}").strip() or 
+    user_info.get("sub")
+)
+
+# 3. Render the UI safely
 st.markdown(
-    f"<p style='font-size: 1.8rem; font-weight: 600;'>🌋 Hello, {st.user}!</p>",
+    f"<p style='font-size: 1.8rem; font-weight: 600;'>🌋 Hello, {display_name}!</p>",
     unsafe_allow_html=True
 )
+
+
+# st.markdown(
+#     f"<p style='font-size: 1.8rem; font-weight: 600;'>🌋 Hello, {st.user}!</p>",
+#     unsafe_allow_html=True
+# )
 
 
 
