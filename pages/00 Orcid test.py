@@ -14,7 +14,7 @@ else:
     if st.button("Log out"):
         st.logout()
 
-st.write(f"Hello, {st.user.name}!")
+st.write(f"Hello, {st.user}!")
 
 query_params = st.query_params
 st.write("Query params:", query_params)
