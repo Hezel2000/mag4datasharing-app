@@ -25,11 +25,6 @@ st.json(st.user)
 st.write("session station:", st.session_state)
 
 
-if st.user.is_logged_in:
-    st.write("User type:", type(st.user))
-    st.write("User dir:", dir(st.user))
-    st.write("User dict:", st.user.to_dict())
-
 
 
 # ------ Sidebar
@@ -42,6 +37,11 @@ if st.sidebar.button("Log out"):
     st.logout()
 
 
+
+if st.user.is_logged_in:
+    st.write("User type:", type(st.user))
+    st.write("User dir:", dir(st.user))
+    st.write("User dict:", st.user.to_dict())
 
 
 # if st.button('Google'):
