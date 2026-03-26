@@ -6,17 +6,6 @@
 
 ---
 
-## ✨ Features
-
-- **ORCID Authentication** – Log in with your ORCID iD to ensure secure, attributed contributions.
-- **File Upload** – Upload geological datasets (CSV, Excel, JSON, etc.) directly through the interface.
-- **Data Preparation** – A dedicated *Prepare your file for upload* page helps you validate, anonymize, and format your data before submission.
-- **View & Manage** – Browse and update previously uploaded datasets.
-- **Public Repository** – All uploads are stored in a public GitHub repository, making them citable and accessible.
-- **Open Source** – The entire platform is open source; contributions are welcome.
-
----
-
 ## 🚀 How to Use
 
 1. **Visit the app**: [https://mag4datasharing-app-pb0ioldt9x.streamlit.app/](https://mag4datasharing-app-pb0ioldt9x.streamlit.app/)
@@ -42,12 +31,3 @@ All uploaded files are stored in a **public GitHub repository**. This ensures:
 - Transparency and open access to the data.
 
 ---
-
-## 🛠️ Local Development
-
-To run the app locally:
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-org/mag4-uploader.git
-   cd mag4-uploader
