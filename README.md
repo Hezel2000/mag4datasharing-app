@@ -1,6 +1,6 @@
 # MAG4 Uploader & Viewer
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://mag4datasharing-app-pb0ioldt9x.streamlit.app/)
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://mag4datasharing-app.streamlit.app/)
 
 **MAG4 Uploader & Viewer** is an open‑source platform for sharing and exploring geological datasets. It provides a simple web interface to upload, manage, and view data, with all files stored securely in a public GitHub repository.
 
@@ -8,7 +8,7 @@
 
 ## 🚀 How to Use
 
-1. **Visit the app**: [https://mag4datasharing-app-pb0ioldt9x.streamlit.app/](https://mag4datasharing-app-pb0ioldt9x.streamlit.app/)
+1. **Visit the app**: [https://mag4datasharing-app.streamlit.app/](https://mag4datasharing-app.streamlit.app/)
 2. **Log in** with your ORCID credentials.
 3. **Prepare your file** (optional): Use the *Prepare your file for upload* page to clean and validate your data.
 4. **Upload** your dataset – provide metadata and confirm the upload.
