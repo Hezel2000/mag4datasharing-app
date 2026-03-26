@@ -74,7 +74,7 @@ st.header('Choose file to upload')
 df_metadata = pd.read_csv('https://raw.githubusercontent.com/Hezel2000/mag4datasets/main/overview_available_datasets.csv')
 
 # Depends on whether a user is logged in to Orcid -> False when logged in
-if st.session_state.is_authenticated:
+if st.user:
     file_uploader_enable_parameter=False
 else:
     file_uploader_enable_parameter=True
@@ -94,8 +94,8 @@ if uploaded_file is not None:
 # ---------- Metadata Fields
     st.header('Metadata')
     st.subheader('Mandatory')
-    st.text_input('ORCID', st.session_state.orcid_user_info['id'], disabled=True)
-    st.text_input('Name', st.session_state.orcid_user_info['given_name'] +' '+ st.session_state.orcid_user_info['family_name'], disabled=True)
+    st.text_input('ORCID', st.user['sub'], disabled=True)
+    st.text_input('Name', st.user['name'], disabled=True)
     # meta_email = st.text_input('Email address', value=None, placeholder='Email addressyour email address')
     meta_title = st.text_input('Title', uploaded_file.name.split('.')[0], disabled=True)
     if meta_title in df_metadata['Title'].values:
@@ -122,8 +122,8 @@ if uploaded_file is not None:
     st.subheader('Preview')
     json_metadata = {
         # , jupyter notebook
-        "ORCID": str(st.session_state.orcid_user_info['id']),
-        "Name": st.session_state.orcid_user_info['given_name'] +' '+ st.session_state.orcid_user_info['family_name'],
+        "ORCID": str(st.user['sub']),
+        "Name": st.user['name'],
         # "Email": meta_email if meta_email is not None else 'still required',
         "Title": uploaded_file.name.split('.')[0],
         "Short Title": meta_short_title if meta_short_title is not None else 'still required',
@@ -160,20 +160,24 @@ if uploaded_file is not None:
         st.session_state.all_metadata_added = False
 
     if st.button("Upload to mag4", disabled=st.session_state.all_metadata_added):
-        response = upload_to_github(file_path_user_dataset, str(st.session_state.orcid_user_info['sub']), 'csv')
+        response = upload_to_github(file_path_user_dataset, str(st.user['sub']), 'csv')
         if response.status_code == 201:
             st.success(f"Dataset successfully uploaded to mag4datasets.")
         else:
             st.error(f"Error uploading file to GitHub. Status Code: {response.status_code}, Response: {response.text}")
 
-        response = upload_to_github(file_path_json_metadata, str(st.session_state.orcid_user_info['sub']), 'json')
+        response = upload_to_github(file_path_json_metadata, str(st.user['sub']), 'json')
         if response.status_code == 201:
             st.success(f"Metadata successfully uploaded to mag4datasets.")
         else:
             st.error(f"Error uploading file to GitHub. Status Code: {response.status_code}, Response: {response.text}")
 
 
-if st.session_state.is_authenticated:
+if st.user.is_logged_in:
     st.sidebar.success("You are logged in with ORCID")
 else:
-    st.sidebar.error("ORCID login required for full functionality")
+    st.sidebar.error('You are not loged in to ORCID')
+
+if st.sidebar.button("Log out"):
+    st.logout()
+

@@ -3,6 +3,7 @@ import requests
 import pandas as pd
 #import json
 
+
 # ------ Functions
 def get_metadata(repo_owner, repo_name, folder, file_name):
     url = f'https://api.github.com/repos/{repo_owner}/{repo_name}/contents/{folder}/{file_name}.json'
@@ -35,7 +36,7 @@ def get_csv_urls(repo_owner, repo_name, folder):
 
 # ------ Webpage
 st.title('Browse Dataset Info & Content')
-df_metadata = pd.read_csv('https://raw.githubusercontent.com/Hezel2000/mag4datasets/main/overview_available_datasets.csv')
+df_metadata = pd.read_csv('https://raw.githubusercontent.com/jiexu2776/mag4datasets/main/overview_available_datasets.csv')
 
 tab1, tab2 = st.tabs(['All Datasets', 'Select a Dataset'])
 
@@ -43,23 +44,19 @@ with tab1:
     st.dataframe(df_metadata)
 
 with tab2:
-    file_urls = get_csv_urls("Hezel2000", "mag4datasets", "data")
+    file_urls = get_csv_urls("jiexu2776", "mag4datasets", "data")
     sel_dataset = st.selectbox('sel', df_metadata['Title'].sort_values(), index=None, placeholder='click to select a dataset', label_visibility='collapsed')
 
     if sel_dataset == None:
         st.write('')
     else:
-        dataset_metadata = get_metadata("Hezel2000", "mag4datasets", "metadata", sel_dataset)
+        dataset_metadata = get_metadata("jiexu2776", "mag4datasets", "metadata", sel_dataset)
         st.table(dataset_metadata)
+        # st.write("Type of file_urls:", type(file_urls))
+        # st.write("file_urls value:", file_urls)
+        # st.write("sel_dataset:", sel_dataset)
         st.dataframe(pd.read_csv(file_urls[sel_dataset]))
         
-
-
-# ------ Siedbar
-if st.session_state.is_authenticated:
-    st.sidebar.success("You are logged in with ORCID")
-else:
-    st.sidebar.error("ORCID login required for full functionality")
 
 
 
@@ -92,3 +89,13 @@ else:
 #         return f"Error: Unable to fetch files. Status code: {response.status_code}"
 # metadata_files = get_json("Hezel2000", "mag4datasets", "metadata")
 # df_metadata = pd.DataFrame(metadata_files).T
+
+# ------ Siedbar
+if st.user.is_logged_in:
+    st.sidebar.success("You are logged in with ORCID")
+else:
+    st.sidebar.error('You are not loged in to ORCID')
+
+if st.sidebar.button("Log out"):
+    st.logout()
+

@@ -1,9 +1,13 @@
-streamlit
-requests
+streamlit>=1.42.0
 pandas
 datetime
-oauthlib
-requests-oauthlib
+# oauthlib
+# requests-oauthlib
+Authlib>=1.3.2
+matplotlib
+pyrolite
+requests
+
 
 # The following are not required, as these are std python libraries, and therefore already available
 #pathlib

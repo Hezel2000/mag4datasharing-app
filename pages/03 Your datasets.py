@@ -3,9 +3,9 @@ import pandas as pd
 
 st.title('Your Datasets')
 
-if st.session_state.is_authenticated == True:
+if st.user.is_logged_in == True:
     df_metadata = pd.read_csv('https://raw.githubusercontent.com/Hezel2000/mag4datasets/main/overview_available_datasets.csv')
-    df_metadata_personal = df_metadata[df_metadata['ORCID'] == st.session_state.orcid_user_info['id'].split('/')[-1]]
+    df_metadata_personal = df_metadata[df_metadata['ORCID'] == st.user['sub'].split('/')[-1]]
 
     df_metadata_personal.insert(0, 'update', False)
     df_metadata_personal.insert(0, 'delete', False)
@@ -30,7 +30,11 @@ else:
     st.subheader('Authenticate with ORCID to see your uploaded datsets.')
 
 
-if st.session_state.is_authenticated:
+if st.user.is_logged_in:
     st.sidebar.success("You are logged in with ORCID")
 else:
-    st.sidebar.error("ORCID login required for full functionality")
+    st.sidebar.error('You are not loged in to ORCID')
+
+if st.sidebar.button("Log out"):
+    st.logout()
+
