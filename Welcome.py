@@ -24,10 +24,10 @@ view, update, and manage them directly in this interface.
   We’d love to hear from you. Please contact **Dominik Hezel** or **Jie Xu**!
 """
 )
+# if not st.user or not st.user.is_logged_in:
 
 
-
-if not st.user or not st.user.is_logged_in:
+if not st.user:
     st.header("Log in:")
     if st.button("Log in with ORCID"):
         st.login("orcid")
