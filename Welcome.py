@@ -16,8 +16,8 @@ geological datasets.
 Your uploads are stored securely in our public GitHub repository, and you can
 view, update, and manage them directly in this interface.
 
-### 🔐 Log in with ORCID or Google
-- Click the button below to authenticate using **ORCID** or **Google**.
+### 🔐 Log in with ORCID
+- Click the button below to authenticate using **ORCID**.
 - After logging in, you can upload new datasets or manage existing ones.
 - Please remember to log out when you are finished.
 - Have suggestions or ideas to improve the platform?  
@@ -31,8 +31,8 @@ if not st.user:
     st.header("Log in:")
     if st.button("Log in with ORCID"):
         st.login("orcid")
-    if st.button("Log in with GOOGLE"):
-        st.login("google")
+    # if st.button("Log in with GOOGLE"):
+    #     st.login("google")
     st.stop()
 else:
     if st.button("Log out"):
