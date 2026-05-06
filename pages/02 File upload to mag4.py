@@ -122,27 +122,27 @@ if uploaded_file is not None:
     st.subheader('Preview')
     json_metadata = {
         # , jupyter notebook
-        "ORCID": str(st.user['sub']),
+        "creater_orcid": str(st.user['sub']),
         # "Name": st.user['name'],
-        "Name": (
+        "creater_name": (
             st.user.get("name") or 
             f"{st.user.get('given_name', '')} {st.user.get('family_name', '')}".strip() or 
             st.user.get("sub")
         ),  
         # "Email": meta_email if meta_email is not None else 'still required',
-        "Title": uploaded_file.name.split('.')[0],
-        "Short Title": meta_short_title if meta_short_title is not None else 'still required',
-        "Description": meta_description if meta_description is not None else 'still required',
-        "Keywords":  meta_keywords if meta_keywords is not None else 'still required',
-        "Type": meta_type if meta_type is not None else 'still required',
-        "Licence": meta_usage_licence if meta_usage_licence is not None else 'still required',
-        "Creation Date": meta_creation_date.strftime("%Y-%m-%d") if meta_creation_date is not None else None,
-        "Upload Date": datetime.now().strftime("%Y-%m-%d"),
-        "Version": meta_version if meta_version is not None else None,
-        "Source": meta_source if meta_source is not None else None,
-        "References": meta_references if meta_references is not None else None,
-        "Comments": meta_comments if meta_comments is not None else None,
-        "Request doi": 'no' if meta_request_doi is not None else 'yes'
+        "name": uploaded_file.name.split('.')[0],
+        "alternateName": meta_short_title if meta_short_title is not None else 'still required',
+        "description": meta_description if meta_description is not None else 'still required',
+        "keywords":  meta_keywords if meta_keywords is not None else 'still required',
+        "type": meta_type if meta_type is not None else 'still required',
+        "license": meta_usage_licence if meta_usage_licence is not None else 'still required',
+        "dateCreated": meta_creation_date.strftime("%Y-%m-%d") if meta_creation_date is not None else None,
+        "datePublished": datetime.now().strftime("%Y-%m-%d"),
+        "version": meta_version if meta_version is not None else None,
+        "creator_affiliation": meta_source if meta_source is not None else None,
+        "citation": meta_references if meta_references is not None else None,
+        "comment": meta_comments if meta_comments is not None else None,
+        "doiRequest": 'no' if meta_request_doi is not None else 'yes'
     }
     
     #Writing the json file
